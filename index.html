@@ -1,622 +1,492 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>🔥 Fire Hub</title>
+<title>Fire Hub 🔥</title>
 
 <style>
-*{
-    box-sizing:border-box;
+:root{
+  --bg:#080a0f;
+  --panel:#11151d;
+  --panel2:#171c25;
+  --line:#2b3340;
+  --text:#f5f7fb;
+  --muted:#99a3b2;
+  --fire:#ff4d00;
+  --fire2:#ff8a00;
 }
 
-:root{
-    --fire:#ff4b00;
-    --fire2:#ff7a00;
-    --bg:#070707;
-    --panel:#111;
-    --panel2:#161616;
-    --border:#292929;
-    --text:#fff;
-    --muted:#999;
-}
+*{box-sizing:border-box}
 
 html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,77,0,.14),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(255,138,0,.08),transparent 22%),
+    var(--bg);
+  color:var(--text);
 }
 
-body{
-    overflow-x:hidden;
+body{overflow-x:hidden}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:72px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:0 22px;
+  background:rgba(9,11,16,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
 }
 
-button,
-input,
-select,
-textarea{
-    font-family:inherit;
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-    height:70px;
-    display:flex;
-    align-items:center;
-    padding:0 24px;
-    background:
-        radial-gradient(circle at 50% -100%,#7a2100,transparent 55%),
-        linear-gradient(90deg,#110000,#240700,#110000);
-    border-bottom:1px solid var(--fire);
-    position:sticky;
-    top:0;
-    z-index:100;
-    box-shadow:0 0 25px #ff400018;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+  text-decoration:none;
+  font-weight:900;
+  font-size:21px;
+  letter-spacing:1px;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:2px;
-    white-space:nowrap;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--fire),var(--fire2));
+  box-shadow:0 8px 25px rgba(255,77,0,.25);
 }
 
-.logo span{
-    color:var(--fire);
+.fire{color:var(--fire)}
+
+.version{
+  margin-left:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:var(--muted);
+  font-size:12px;
 }
 
-.header-right{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:10px;
+.version select{
+  padding:9px 11px;
+  background:var(--panel2);
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:white;
 }
-
-.version-box{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 10px;
-    background:#141414;
-    border:1px solid #333;
-    border-radius:8px;
-    color:#aaa;
-    font-size:12px;
-}
-
-.version-box select{
-    width:auto;
-    padding:5px 8px;
-    border:0;
-    background:#141414;
-}
-
-/* =========================================================
-   LAYOUT
-========================================================= */
 
 .layout{
-    display:flex;
-    min-height:calc(100vh - 70px);
+  display:flex;
+  min-height:calc(100vh - 72px);
 }
 
 .sidebar{
-    width:220px;
-    flex-shrink:0;
-    background:#0c0c0c;
-    border-right:1px solid #222;
-    padding:15px;
+  width:235px;
+  flex:0 0 235px;
+  padding:15px 12px;
+  background:rgba(11,14,20,.9);
+  border-right:1px solid var(--line);
+  position:sticky;
+  top:72px;
+  height:calc(100vh - 72px);
+  overflow:auto;
 }
 
 .nav{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:#999;
-    padding:13px;
-    margin-bottom:7px;
-    text-align:left;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
-    transition:.15s;
+  width:100%;
+  text-align:left;
+  padding:11px 12px;
+  margin-bottom:4px;
+  border-radius:9px;
+  border:1px solid transparent;
+  background:transparent;
+  color:#b8c0cc;
 }
 
 .nav:hover{
-    background:#181818;
-    color:white;
+  background:#161b24;
+  color:white;
 }
 
 .nav.active{
-    background:#210d07;
-    color:white;
-    box-shadow:inset 3px 0 var(--fire);
+  background:#251006;
+  border-color:#5c2a12;
+  color:white;
 }
-
-/* =========================================================
-   MAIN
-========================================================= */
 
 main{
-    flex:1;
-    min-width:0;
-    padding:35px;
+  flex:1;
+  width:100%;
+  max-width:1400px;
+  margin:auto;
+  padding:30px;
 }
 
-.page{
-    display:none;
-    animation:fade .15s ease;
-}
-
-.page.active{
-    display:block;
-}
-
-@keyframes fade{
-    from{
-        opacity:.4;
-        transform:translateY(4px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-h1{
-    font-size:42px;
-    margin:0 0 8px;
-}
-
-h2{
-    margin-top:0;
-}
-
-.subtitle{
-    color:var(--muted);
-    margin-bottom:30px;
-}
-
-/* =========================================================
-   CARDS
-========================================================= */
+.page{display:none}
+.page.active{display:block}
 
 .hero{
-    padding:35px;
-    border:1px solid var(--border);
-    border-radius:15px;
-    background:
-        radial-gradient(circle at 90% 10%,#5b1900,transparent 40%),
-        linear-gradient(135deg,#151515,#0c0c0c);
-    margin-bottom:25px;
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(255,77,0,.25);
+  background:
+    radial-gradient(circle at 85% 20%,rgba(255,138,0,.15),transparent 27%),
+    linear-gradient(135deg,rgba(255,77,0,.10),rgba(17,21,29,.95));
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
 }
 
-.hero h2{
-    font-size:30px;
+.hero h1{
+  font-size:clamp(36px,6vw,65px);
+  line-height:1;
+  margin:12px 0;
 }
 
-.card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:15px;
+.firegrad{
+  background:linear-gradient(90deg,#fff,var(--fire2),var(--fire));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
-.card{
-    padding:22px;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:12px;
-    cursor:pointer;
-    transition:.15s;
+.hero p{
+  max-width:850px;
+  color:#bdc5d0;
+  line-height:1.65;
+  font-size:17px;
 }
 
-.card:hover{
-    transform:translateY(-3px);
-    border-color:var(--fire);
-    box-shadow:0 8px 30px #ff430022;
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.card .icon{
-    font-size:30px;
-    margin-bottom:10px;
+.btn{
+  padding:10px 14px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:var(--panel2);
+  color:white;
+  font-weight:800;
 }
 
-.card h3{
-    margin:5px 0;
-}
+.btn:hover{filter:brightness(1.1)}
 
-.card p{
-    color:#888;
-    font-size:13px;
-}
-
-/* =========================================================
-   PANELS
-========================================================= */
-
-.panel{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:25px;
-    max-width:1100px;
-}
-
-label{
-    display:block;
-    color:#aaa;
-    font-size:13px;
-    margin:15px 0 6px;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    background:#090909;
-    color:white;
-    border:1px solid #333;
-    border-radius:7px;
-    outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:var(--fire);
-}
-
-select{
-    cursor:pointer;
-}
-
-textarea{
-    min-height:140px;
-    resize:vertical;
-    font-family:Consolas,monospace;
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.generate{
-    margin-top:18px;
-    padding:12px 20px;
-    border:0;
-    border-radius:7px;
-    background:linear-gradient(135deg,var(--fire2),#d51f00);
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.generate:hover{
-    filter:brightness(1.15);
-}
-
-.secondary{
-    padding:10px 15px;
-    border:1px solid #444;
-    background:#191919;
-    color:white;
-    border-radius:7px;
-    cursor:pointer;
-}
-
-.secondary:hover{
-    border-color:var(--fire);
+.primary{
+  background:linear-gradient(135deg,var(--fire),var(--fire2));
+  border-color:transparent;
 }
 
 .danger{
-    padding:9px 12px;
-    border:1px solid #552222;
-    background:#210e0e;
-    color:#ff7777;
-    border-radius:7px;
-    cursor:pointer;
+  background:#3a151a;
+  border-color:#6c2931;
 }
 
-.move-btn{
-    padding:7px 9px;
-    border:1px solid #333;
-    background:#171717;
-    color:#ccc;
-    border-radius:6px;
-    cursor:pointer;
+.small{
+  padding:7px 9px;
+  font-size:12px;
 }
 
-.move-btn:hover{
-    border-color:var(--fire);
-    color:white;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:16px 0;
 }
 
-.copy{
-    margin-top:10px;
-    padding:10px 15px;
-    border:1px solid #444;
-    background:#191919;
-    color:white;
-    border-radius:7px;
-    cursor:pointer;
+.stat{
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--panel);
 }
 
-.copy:hover{
-    border-color:var(--fire);
+.stat b{
+  display:block;
+  font-size:24px;
+  margin-bottom:5px;
 }
 
-/* =========================================================
-   OUTPUT
-========================================================= */
+.stat span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:16px;
+}
+
+.card{
+  text-align:left;
+  padding:19px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:linear-gradient(180deg,#171c25,#10141b);
+  color:white;
+}
+
+.card:hover{
+  border-color:#ff4d0077;
+  transform:translateY(-2px);
+}
+
+.card h3{
+  margin:0 0 7px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+  margin:0;
+}
+
+.head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.head h2{
+  margin:0;
+  font-size:30px;
+}
+
+.head p{
+  color:var(--muted);
+  margin:5px 0 0;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  color:#afb7c3;
+  font-size:12px;
+  font-weight:700;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  background:#0b0e14;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 11px;
+  outline:none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#ff4d00aa;
+  box-shadow:0 0 0 3px #ff4d0018;
+}
 
 .output{
-    margin-top:20px;
-    display:none;
+  min-height:130px;
+  margin:0;
+  padding:14px;
+  white-space:pre-wrap;
+  overflow:auto;
+  border:1px solid #1e2530;
+  border-radius:10px;
+  background:#07090d;
+  color:white;
+  font:13px/1.55 Consolas,monospace;
 }
 
-.output textarea{
-    min-height:180px;
+.btns{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
 }
 
-/* =========================================================
-   VILLAGER
-========================================================= */
-
-.villager-top{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+.checkrow{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:12px;
 }
 
-.trades-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    margin-top:30px;
-    margin-bottom:15px;
+.check{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#c8cfd8;
+  font-size:13px;
 }
 
-.trade-count{
-    color:#777;
-    font-size:12px;
+.trade{
+  padding:14px;
+  margin-top:12px;
+  border-radius:13px;
+  border:1px solid var(--line);
+  background:#0c1016;
 }
 
-.trade-card{
-    background:#0d0d0d;
-    border:1px solid #303030;
-    border-radius:12px;
-    padding:20px;
-    margin-bottom:15px;
-}
-
-.trade-card:hover{
-    border-color:#444;
-}
-
-.trade-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:10px;
-}
-
-.trade-title{
-    font-weight:bold;
-    color:#ff9b70;
+.tradehead{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:10px;
 }
 
 .trade-actions{
-    display:flex;
-    gap:6px;
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
 }
 
-.trade-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:12px;
+.colors{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
 }
 
-.item-box{
-    padding:15px;
-    background:#151515;
-    border:1px solid #252525;
-    border-radius:8px;
+.colorbtn{
+  padding:12px;
+  text-align:left;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#0d1117;
+  color:white;
 }
 
-.item-box h4{
-    margin:0 0 10px;
-    color:#ddd;
+.colorbtn:hover{
+  border-color:#ff4d00;
 }
 
-.trade-options{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    gap:12px;
-    margin-top:12px;
+.muted{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
 }
 
-.checkbox{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:10px;
-    background:#141414;
-    border:1px solid #262626;
-    border-radius:7px;
-    color:#aaa;
-    font-size:13px;
+.footer{
+  padding:30px 0 10px;
+  text-align:center;
+  color:#697484;
+  font-size:12px;
 }
-
-.checkbox input{
-    width:auto;
-}
-
-.add-trade{
-    width:100%;
-    padding:13px;
-    border:1px dashed #555;
-    background:#101010;
-    color:#bbb;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.add-trade:hover{
-    border-color:var(--fire);
-    color:white;
-}
-
-.info-box{
-    margin-top:15px;
-    padding:13px;
-    border:1px solid #292929;
-    border-radius:8px;
-    background:#0c0c0c;
-    color:#888;
-    font-size:12px;
-}
-
-.info-box strong{
-    color:#ddd;
-}
-
-/* =========================================================
-   COLOURS
-========================================================= */
-
-.color-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-    gap:8px;
-}
-
-.color{
-    padding:13px;
-    border-radius:6px;
-    background:#191919;
-    border:1px solid #292929;
-    cursor:pointer;
-}
-
-.color:hover{
-    border-color:var(--fire);
-}
-
-/* =========================================================
-   DOWNLOADS
-========================================================= */
-
-.download{
-    display:inline-block;
-    padding:13px 20px;
-    background:#191919;
-    border:1px solid #333;
-    color:white;
-    border-radius:7px;
-    text-decoration:none;
-    margin:5px;
-}
-
-.download:hover{
-    border-color:var(--fire);
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
 
 #toast{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    padding:13px 18px;
-    background:#171717;
-    border:1px solid var(--fire);
-    border-radius:8px;
-    box-shadow:0 5px 30px #000;
-    display:none;
-    z-index:500;
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  padding:12px 14px;
+  border-radius:10px;
+  background:#161c25;
+  border:1px solid var(--fire);
+  box-shadow:0 12px 35px #0008;
+  transform:translateY(25px);
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:500;
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+#toast.show{
+  transform:none;
+  opacity:1;
+}
 
-@media(max-width:850px){
+@media(max-width:1050px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
 
-    .sidebar{
-        width:65px;
-        padding:10px;
-    }
+@media(max-width:780px){
+  .sidebar{
+    width:72px;
+    flex-basis:72px;
+    padding:8px;
+  }
 
-    .nav{
-        font-size:0;
-        text-align:center;
-        padding:14px 5px;
-    }
+  .nav{
+    font-size:0;
+    text-align:center;
+  }
 
-    main{
-        padding:20px;
-    }
+  main{padding:18px}
+  .form{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .colors{grid-template-columns:repeat(2,1fr)}
+}
 
-    h1{
-        font-size:32px;
-    }
-
-    .villager-top,
-    .trade-grid,
-    .trade-options{
-        grid-template-columns:1fr;
-    }
-
-    .logo{
-        font-size:19px;
-    }
-
-    .version-box{
-        padding:6px;
-    }
+@media(max-width:600px){
+  .grid,.stats{grid-template-columns:1fr}
+  .hero{padding:22px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="topbar">
 
-<div class="logo">
-🔥 FIRE<span>HUB</span>
-</div>
+<a class="brand" href="#" onclick="showPage('home');return false;">
+  <span class="logo">🔥</span>
+  <span>FIRE<span class="fire">HUB</span></span>
+</a>
 
-<div class="header-right">
+<div class="version">
+  <span>Minecraft:</span>
 
-<div class="version-box">
-
-<span>Minecraft</span>
-
-<select id="globalVersion" onchange="versionChanged()">
-
-<option value="1.8">1.8</option>
-<option value="1.12">1.12</option>
-<option value="1.16">1.16</option>
-<option value="1.20">1.20</option>
-<option value="1.21" selected>1.21</option>
-
-</select>
-
-</div>
-
+  <select id="version">
+    <option>1.8</option>
+    <option selected>1.12.2</option>
+    <option>1.16.5</option>
+    <option>1.19.4</option>
+    <option>1.20.1</option>
+    <option>1.20.4</option>
+    <option>1.20.5+</option>
+    <option>1.21+</option>
+  </select>
 </div>
 
 </header>
@@ -626,45 +496,19 @@ textarea{
 
 <aside class="sidebar">
 
-<button class="nav active" onclick="page('home',this)">
-🏠 Home
-</button>
-
-<button class="nav" onclick="page('generators',this)">
-⚙ Generators
-</button>
-
-<button class="nav" onclick="page('commands',this)">
-💻 Commands
-</button>
-
-<button class="nav" onclick="page('give',this)">
-🎁 Give
-</button>
-
-<button class="nav" onclick="page('summon',this)">
-👾 Summon
-</button>
-
-<button class="nav" onclick="page('villager',this)">
-🧑‍🌾 Villager
-</button>
-
-<button class="nav" onclick="page('potion',this)">
-🧪 Potion
-</button>
-
-<button class="nav" onclick="page('colors',this)">
-🌈 Colours
-</button>
-
-<button class="nav" onclick="page('downloads',this)">
-📥 Downloads
-</button>
-
-<button class="nav" onclick="page('about',this)">
-🔥 About
-</button>
+<button class="nav active" data-page="home">🏠 Home</button>
+<button class="nav" data-page="generators">⚙️ Generators</button>
+<button class="nav" data-page="give">🎁 Give</button>
+<button class="nav" data-page="summon">👾 Summon</button>
+<button class="nav" data-page="execute">⚡ Execute</button>
+<button class="nav" data-page="fill">🧱 Fill</button>
+<button class="nav" data-page="effect">🧪 Effect</button>
+<button class="nav" data-page="enchant">✨ Enchant</button>
+<button class="nav" data-page="villager">🧑 Villagers</button>
+<button class="nav" data-page="tellraw">💬 Tellraw</button>
+<button class="nav" data-page="colours">🎨 Colours</button>
+<button class="nav" data-page="downloads">⬇️ Downloads</button>
+<button class="nav" data-page="about">ℹ️ About</button>
 
 </aside>
 
@@ -672,68 +516,98 @@ textarea{
 <main>
 
 
-<!-- =====================================================
-     HOME
-===================================================== -->
-
-<section id="home" class="page active">
-
-<h1>🔥 Fire Hub</h1>
-
-<div class="subtitle">
-Minecraft tools, generators and downloads.
-</div>
+<section class="page active" id="home">
 
 <div class="hero">
 
-<h2>Welcome to Fire Hub</h2>
+<div class="muted">🔥 FIRE HUB</div>
+
+<h1>
+Minecraft commands
+<span class="firegrad">FAST.</span>
+</h1>
 
 <p>
-Create commands, custom villagers, items, mobs and more.
+Pick a Minecraft version, choose a generator and create commands
+without typing everything manually.
 </p>
 
-<p>
-Choose your Minecraft version at the top. Generators that
-support version-specific syntax will automatically use it.
-</p>
+<div class="actions">
+
+<button class="btn primary"
+onclick="showPage('generators')">
+⚙️ Open Generators
+</button>
+
+<button class="btn"
+onclick="showPage('villager')">
+🧑 Build Villager
+</button>
+
+<button class="btn"
+onclick="showPage('colours')">
+🎨 Colours
+</button>
 
 </div>
 
-<div class="card-grid">
-
-<div class="card" onclick="page('commands')">
-<div class="icon">💻</div>
-<h3>Command Generator</h3>
-<p>Create Minecraft commands.</p>
 </div>
 
-<div class="card" onclick="page('give')">
-<div class="icon">🎁</div>
-<h3>Give Generator</h3>
-<p>Create custom items.</p>
+
+<div class="stats">
+
+<div class="stat">
+<b>10+</b>
+<span>Generators</span>
 </div>
 
-<div class="card" onclick="page('summon')">
-<div class="icon">👾</div>
-<h3>Summon Generator</h3>
-<p>Create custom mobs.</p>
+<div class="stat">
+<b>8</b>
+<span>Version presets</span>
 </div>
 
-<div class="card" onclick="page('villager')">
-<div class="icon">🧑‍🌾</div>
-<h3>Villager Generator</h3>
-<p>Build villagers with multiple trades.</p>
+<div class="stat">
+<b>0</b>
+<span>Server required</span>
 </div>
 
-<div class="card" onclick="page('potion')">
-<div class="icon">🧪</div>
-<h3>Potion Generator</h3>
-<p>Create effect commands.</p>
+<div class="stat">
+<b>🔥</b>
+<span>Fire Hub</span>
 </div>
 
-<div class="card" onclick="page('colors')">
-<div class="icon">🌈</div>
-<h3>Colour Codes</h3>
+</div>
+
+
+<div class="grid">
+
+<div class="card" onclick="showPage('give')">
+<h3>🎁 Give</h3>
+<p>Create item commands.</p>
+</div>
+
+<div class="card" onclick="showPage('summon')">
+<h3>👾 Summon</h3>
+<p>Create custom mob commands.</p>
+</div>
+
+<div class="card" onclick="showPage('villager')">
+<h3>🧑 Villagers</h3>
+<p>Create multiple custom trades.</p>
+</div>
+
+<div class="card" onclick="showPage('execute')">
+<h3>⚡ Execute</h3>
+<p>Build execute commands.</p>
+</div>
+
+<div class="card" onclick="showPage('fill')">
+<h3>🧱 Fill</h3>
+<p>Fill areas quickly.</p>
+</div>
+
+<div class="card" onclick="showPage('colours')">
+<h3>🎨 Colours</h3>
 <p>Copy Minecraft colour codes.</p>
 </div>
 
@@ -742,362 +616,583 @@ support version-specific syntax will automatically use it.
 </section>
 
 
-<!-- =====================================================
-     GENERATORS
-===================================================== -->
+<section class="page" id="generators">
 
-<section id="generators" class="page">
-
-<h1>⚙ Generators</h1>
-
-<div class="subtitle">
-Choose a Fire Hub generator.
+<div class="head">
+<div>
+<h2>⚙️ Generators</h2>
+<p>Choose your tool.</p>
+</div>
 </div>
 
-<div class="card-grid">
+<div class="grid">
 
-<div class="card" onclick="page('commands')">
-<div class="icon">💻</div>
-<h3>Command</h3>
-<p>General command builder.</p>
-</div>
-
-<div class="card" onclick="page('give')">
-<div class="icon">🎁</div>
-<h3>Give</h3>
+<button class="card" onclick="showPage('give')">
+<h3>🎁 Give</h3>
 <p>Create item commands.</p>
-</div>
+</button>
 
-<div class="card" onclick="page('summon')">
-<div class="icon">👾</div>
-<h3>Summon</h3>
-<p>Create custom mobs.</p>
-</div>
+<button class="card" onclick="showPage('summon')">
+<h3>👾 Summon</h3>
+<p>Create mobs.</p>
+</button>
 
-<div class="card" onclick="page('villager')">
-<div class="icon">🧑‍🌾</div>
-<h3>Villager</h3>
-<p>Build multi-trade villagers.</p>
-</div>
+<button class="card" onclick="showPage('execute')">
+<h3>⚡ Execute</h3>
+<p>Create execute chains.</p>
+</button>
 
-<div class="card" onclick="page('potion')">
-<div class="icon">🧪</div>
-<h3>Potion</h3>
-<p>Create effects.</p>
-</div>
+<button class="card" onclick="showPage('fill')">
+<h3>🧱 Fill</h3>
+<p>Create fill commands.</p>
+</button>
+
+<button class="card" onclick="showPage('effect')">
+<h3>🧪 Effect</h3>
+<p>Give or clear effects.</p>
+</button>
+
+<button class="card" onclick="showPage('enchant')">
+<h3>✨ Enchant</h3>
+<p>Enchant held items.</p>
+</button>
+
+<button class="card" onclick="showPage('villager')">
+<h3>🧑 Villagers</h3>
+<p>Advanced trade generator.</p>
+</button>
+
+<button class="card" onclick="showPage('tellraw')">
+<h3>💬 Tellraw</h3>
+<p>Create JSON chat.</p>
+</button>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     COMMANDS
-===================================================== -->
+<section class="page" id="give">
 
-<section id="commands" class="page">
-
-<h1>💻 Command Generator</h1>
-
-<div class="subtitle">
-Create a command quickly.
+<div class="head">
+<div>
+<h2>🎁 Give Generator</h2>
+<p>Create a /give command.</p>
+</div>
 </div>
 
 <div class="panel">
 
-<label>Command</label>
+<div class="form">
 
-<input
-id="customCommand"
-placeholder="/gamemode creative @p"
->
-
-<button class="generate" onclick="generateCommand()">
-Generate
-</button>
-
-<div class="output" id="commandOutput">
-
-<textarea id="commandResult" readonly></textarea>
-
-<button class="copy" onclick="copyText('commandResult')">
-📋 Copy
-</button>
-
+<div class="field">
+<label>Target</label>
+<input id="gt" value="@p">
 </div>
 
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     GIVE
-===================================================== -->
-
-<section id="give" class="page">
-
-<h1>🎁 Give Generator</h1>
-
-<div class="subtitle">
-Create a custom item.
-</div>
-
-<div class="panel">
-
+<div class="field">
 <label>Item ID</label>
+<input id="gi" value="minecraft:diamond">
+</div>
 
-<input
-id="giveItem"
-placeholder="diamond_sword"
->
-
+<div class="field">
 <label>Amount</label>
+<input id="ga" type="number" value="64" min="1">
+</div>
 
-<input
-id="giveAmount"
-type="number"
-min="1"
-value="1"
->
+<div class="field">
+<label>Custom name</label>
+<input id="gn" placeholder="Fire Diamond">
+</div>
 
-<label>Custom Name</label>
+<div class="field full">
+<label>Extra NBT / components</label>
+<input id="gx" placeholder="{Unbreakable:1b}">
+</div>
 
-<input
-id="giveName"
-placeholder="Fire Sword"
->
+</div>
 
-<label>Enchantments</label>
+</div>
 
-<input
-id="giveEnchant"
-placeholder="sharpness:5,unbreaking:3"
->
+<div class="panel">
 
-<button class="generate" onclick="generateGive()">
+<div class="btns">
+
+<button class="btn primary" onclick="genGive()">
 Generate
 </button>
 
-<div class="output" id="giveOutput">
-
-<textarea id="giveResult" readonly></textarea>
-
-<button class="copy" onclick="copyText('giveResult')">
-📋 Copy
+<button class="btn" onclick="copyOut('go')">
+Copy
 </button>
 
 </div>
+
+<pre class="output" id="go"></pre>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     SUMMON
-===================================================== -->
+<section class="page" id="summon">
 
-<section id="summon" class="page">
-
-<h1>👾 Summon Generator</h1>
-
-<div class="subtitle">
-Create a custom mob.
+<div class="head">
+<div>
+<h2>👾 Summon Generator</h2>
+<p>Create a custom mob.</p>
+</div>
 </div>
 
 <div class="panel">
 
-<label>Mob</label>
+<div class="form">
 
-<select id="mob">
+<div class="field">
+<label>Mob ID</label>
+<input id="sm" value="minecraft:zombie">
+</div>
 
-<option>zombie</option>
-<option>skeleton</option>
-<option>creeper</option>
-<option>spider</option>
-<option>cave_spider</option>
-<option>enderman</option>
-<option>witch</option>
-<option>blaze</option>
-<option>piglin</option>
-<option>pig</option>
-<option>cow</option>
-<option>sheep</option>
-<option>villager</option>
+<div class="field">
+<label>Position</label>
+<input id="sp" value="~ ~ ~">
+</div>
 
-</select>
-
+<div class="field">
 <label>Name</label>
+<input id="sn" placeholder="Fire Boss">
+</div>
 
-<input
-id="mobName"
-placeholder="Fire Boss"
->
-
+<div class="field">
 <label>Health</label>
+<input id="sh" type="number" placeholder="200">
+</div>
 
-<input
-id="mobHealth"
-type="number"
-value="20"
->
+<div class="field full">
+<label>Extra NBT / components</label>
+<input id="sx" placeholder="{PersistenceRequired:1b}">
+</div>
 
-<label>Invulnerable</label>
+</div>
 
-<select id="invulnerable">
+<div class="checkrow">
 
-<option value="false">No</option>
-<option value="true">Yes</option>
+<label class="check">
+<input id="sai" type="checkbox">
+No AI
+</label>
 
-</select>
+<label class="check">
+<input id="sinv" type="checkbox">
+Invulnerable
+</label>
 
-<button class="generate" onclick="generateSummon()">
+<label class="check">
+<input id="ssi" type="checkbox">
+Silent
+</label>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+
+<button class="btn primary" onclick="genSummon">
 Generate
 </button>
 
-<div class="output" id="summonOutput">
+<button class="btn" onclick="genSummon()">
+Generate
+</button>
 
-<textarea id="summonResult" readonly></textarea>
-
-<button class="copy" onclick="copyText('summonResult')">
-📋 Copy
+<button class="btn" onclick="copyOut('so')">
+Copy
 </button>
 
 </div>
+
+<pre class="output" id="so"></pre>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     VILLAGER
-===================================================== -->
+<section class="page" id="execute">
 
-<section id="villager" class="page">
-
-<h1>🧑‍🌾 Villager Trade Generator</h1>
-
-<div class="subtitle">
-Build a custom villager with multiple trades.
+<div class="head">
+<div>
+<h2>⚡ Execute Generator</h2>
+<p>Build common execute commands.</p>
+</div>
 </div>
 
 <div class="panel">
 
+<div class="form">
 
-<div class="info-box">
+<div class="field">
+<label>Selector</label>
 
-<strong>Version-aware generator:</strong>
-The command format changes automatically depending on
-the Minecraft version selected at the top.
+<select id="es">
+<option>@p</option>
+<option>@a</option>
+<option>@s</option>
+<option>@e</option>
+<option>@r</option>
+</select>
 
-Current version:
-<strong id="villagerVersionDisplay">1.21</strong>
+</div>
+
+<div class="field">
+<label>Command to run</label>
+<input id="er" value="say Hello">
+</div>
+
+<div class="field">
+<label>Pattern</label>
+
+<select id="ec">
+<option value="run">Run</option>
+<option value="at">At selector</option>
+<option value="asat">As + at selector</option>
+<option value="if">If entity exists</option>
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+<button class="btn primary" onclick="genExecute()">
+Generate
+</button>
+
+<button class="btn" onclick="copyOut('eo')">
+Copy
+</button>
+</div>
+
+<pre class="output" id="eo"></pre>
+
+</div>
+
+</section>
+
+
+<section class="page" id="fill">
+
+<div class="head">
+<div>
+<h2>🧱 Fill Generator</h2>
+<p>Create a /fill command.</p>
+</div>
+</div>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+<label>From</label>
+<input id="ff" value="~ ~ ~">
+</div>
+
+<div class="field">
+<label>To</label>
+<input id="ft" value="~10 ~10 ~10">
+</div>
+
+<div class="field">
+<label>Block</label>
+<input id="fb" value="minecraft:stone">
+</div>
+
+<div class="field">
+<label>Mode</label>
+
+<select id="fm">
+<option>replace</option>
+<option>destroy</option>
+<option>keep</option>
+<option>hollow</option>
+<option>outline</option>
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+
+<button class="btn primary" onclick="genFill()">
+Generate
+</button>
+
+<button class="btn" onclick="copyOut('fo')">
+Copy
+</button>
+
+</div>
+
+<pre class="output" id="fo"></pre>
+
+</div>
+
+</section>
+
+
+<section class="page" id="effect">
+
+<div class="head">
+<div>
+<h2>🧪 Effect Generator</h2>
+<p>Give or clear potion effects.</p>
+</div>
+</div>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+<label>Target</label>
+<input id="et" value="@p">
+</div>
+
+<div class="field">
+<label>Effect</label>
+<input id="en" value="minecraft:strength">
+</div>
+
+<div class="field">
+<label>Seconds</label>
+<input id="ed" type="number" value="30">
+</div>
+
+<div class="field">
+<label>Amplifier</label>
+<input id="ea" type="number" value="1">
+</div>
+
+<div class="field">
+<label>Mode</label>
+
+<select id="em">
+<option value="give">Give</option>
+<option value="clear">Clear</option>
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+
+<button class="btn primary" onclick="genEffect()">
+Generate
+</button>
+
+<button class="btn" onclick="copyOut('effo')">
+Copy
+</button>
+
+</div>
+
+<pre class="output" id="effo"></pre>
+
+</div>
+
+</section>
+
+
+<section class="page" id="enchant">
+
+<div class="head">
+<div>
+<h2>✨ Enchant Generator</h2>
+<p>Enchant the item in hand.</p>
+</div>
+</div>
+
+<div class="panel">
+
+<div class="form">
+
+<div class="field">
+<label>Target</label>
+<input id="xt" value="@p">
+</div>
+
+<div class="field">
+<label>Enchantment</label>
+<input id="xn" value="minecraft:sharpness">
+</div>
+
+<div class="field">
+<label>Level</label>
+<input id="xl" type="number" value="5" min="1">
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+
+<button class="btn primary" onclick="genEnchant()">
+Generate
+</button>
+
+<button class="btn" onclick="copyOut('xo')">
+Copy
+</button>
+
+</div>
+
+<pre class="output" id="xo"></pre>
+
+</div>
+
+</section>
+
+
+<section class="page" id="villager">
+
+<div class="head">
+
+<div>
+<h2>🧑 Villager Trade Generator</h2>
+<p>Build unlimited custom trades.</p>
+</div>
 
 </div>
 
 
-<div class="villager-top">
+<div class="panel">
 
+<div class="form">
 
-<div>
-
-<label>Villager Name</label>
-
-<input
-id="villagerName"
-value="Fire Trader"
-placeholder="Fire Trader"
->
-
+<div class="field">
+<label>Villager name</label>
+<input id="vn" value="Fire Trader">
 </div>
 
-
-<div>
-
+<div class="field">
 <label>Profession</label>
 
-<select id="profession">
+<select id="vp">
 
-<option value="none">Unemployed</option>
-<option value="farmer">Farmer</option>
-<option value="fisherman">Fisherman</option>
-<option value="shepherd">Shepherd</option>
-<option value="fletcher">Fletcher</option>
-<option value="librarian">Librarian</option>
+<option value="none">None</option>
+<option value="armorer">Armorer</option>
+<option value="butcher">Butcher</option>
 <option value="cartographer">Cartographer</option>
 <option value="cleric">Cleric</option>
-<option value="armorer">Armorer</option>
-<option value="weaponsmith">Weaponsmith</option>
-<option value="toolsmith">Toolsmith</option>
-<option value="butcher">Butcher</option>
+<option value="farmer">Farmer</option>
+<option value="fisherman">Fisherman</option>
+<option value="fletcher">Fletcher</option>
 <option value="leatherworker">Leatherworker</option>
+<option value="librarian" selected>Librarian</option>
 <option value="mason">Mason</option>
+<option value="shepherd">Shepherd</option>
+<option value="toolsmith">Toolsmith</option>
+<option value="weaponsmith">Weaponsmith</option>
 
 </select>
 
 </div>
 
+<div class="field">
+<label>Villager level</label>
+<input id="vl" type="number" min="1" max="5" value="5">
+</div>
 
-<div>
+<div class="field">
+<label>Villager type</label>
 
-<label>Villager Level</label>
-
-<select id="villagerLevel">
-
-<option value="1">Novice</option>
-<option value="2">Apprentice</option>
-<option value="3">Journeyman</option>
-<option value="4">Expert</option>
-<option value="5" selected>Master</option>
-
+<select id="vt">
+<option>plains</option>
+<option>desert</option>
+<option>jungle</option>
+<option>savanna</option>
+<option>snow</option>
+<option>swamp</option>
+<option>taiga</option>
 </select>
 
 </div>
 
+<div class="field">
+<label>Default max uses</label>
+<input id="vu" type="number" value="999999">
+</div>
 
-<div>
+<div class="field">
+<label>Default XP</label>
+<input id="vx" type="number" value="10">
+</div>
 
-<label>Villager Type</label>
+</div>
 
-<select id="villagerType">
 
-<option value="plains">Plains</option>
-<option value="desert">Desert</option>
-<option value="jungle">Jungle</option>
-<option value="savanna">Savanna</option>
-<option value="snow">Snow</option>
-<option value="swamp">Swamp</option>
-<option value="taiga">Taiga</option>
+<div class="checkrow">
 
-</select>
+<label class="check">
+<input id="vnoai" type="checkbox">
+No AI
+</label>
+
+<label class="check">
+<input id="vinv" type="checkbox">
+Invulnerable
+</label>
+
+<label class="check">
+<input id="vsil" type="checkbox">
+Silent
+</label>
+
+<label class="check">
+<input id="vper" type="checkbox" checked>
+Persistent
+</label>
 
 </div>
 
 </div>
 
 
-<div class="trades-header">
+<div class="panel">
 
-<div>
+<div class="tradehead">
 
-<h2>🛒 Trades</h2>
+<strong>🛒 Trades</strong>
 
-<div class="trade-count" id="tradeCount">
-1 trade
-</div>
+<div class="btns">
 
-</div>
-
-<div>
-
-<button class="secondary" onclick="addTrade()">
+<button class="btn small" onclick="addTrade()">
 ＋ Add Trade
 </button>
 
-<button class="secondary" onclick="resetTrades()">
-↻ Reset
+<button class="btn small" onclick="resetTrades()">
+Reset
 </button>
 
 </div>
@@ -1105,277 +1200,213 @@ placeholder="Fire Trader"
 </div>
 
 
-<div id="tradeList"></div>
-
-
-<button class="add-trade" onclick="addTrade()">
-＋ Add Another Trade
-</button>
-
-
-<div class="trades-header">
-
-<h2>⚙ Villager Settings</h2>
+<div id="trades"></div>
 
 </div>
 
 
-<label class="checkbox">
+<div class="panel">
 
-<input
-type="checkbox"
-id="villagerNoAI"
->
+<div class="btns">
 
-Disable villager AI
-
-</label>
-
-
-<label class="checkbox">
-
-<input
-type="checkbox"
-id="villagerInvulnerable"
->
-
-Make villager invulnerable
-
-</label>
-
-
-<label class="checkbox">
-
-<input
-type="checkbox"
-id="villagerSilent"
->
-
-Make villager silent
-
-</label>
-
-
-<button
-class="generate"
-onclick="generateVillager()"
->
-
+<button class="btn primary" onclick="genVillager()">
 🔥 Generate Villager
-
 </button>
 
+<button class="btn" onclick="copyOut('vo')">
+Copy
+</button>
 
-<div class="output" id="villagerOutput">
+<button class="btn" onclick="saveVillager()">
+Save
+</button>
 
-<textarea
-id="villagerResult"
-readonly
-></textarea>
-
-<button
-class="copy"
-onclick="copyText('villagerResult')"
->
-
-📋 Copy Command
-
+<button class="btn" onclick="loadVillager()">
+Load
 </button>
 
 </div>
+
+<pre class="output" id="vo"></pre>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     POTION
-===================================================== -->
+<section class="page" id="tellraw">
 
-<section id="potion" class="page">
-
-<h1>🧪 Potion Generator</h1>
-
-<div class="subtitle">
-Generate an effect command.
+<div class="head">
+<div>
+<h2>💬 Tellraw Generator</h2>
+<p>Create JSON chat.</p>
+</div>
 </div>
 
 <div class="panel">
 
-<label>Effect</label>
+<div class="form">
 
-<select id="effect">
+<div class="field">
+<label>Target</label>
+<input id="tt" value="@a">
+</div>
 
-<option>speed</option>
-<option>strength</option>
-<option>regeneration</option>
-<option>resistance</option>
-<option>fire_resistance</option>
-<option>jump_boost</option>
-<option>night_vision</option>
-<option>invisibility</option>
-<option>haste</option>
-<option>water_breathing</option>
-<option>absorption</option>
-<option>luck</option>
+<div class="field">
+<label>Text</label>
+<input id="tx" value="WELCOME TO FIRE HUB!">
+</div>
 
+<div class="field">
+<label>Colour</label>
+
+<select id="tc">
+<option>white</option>
+<option>red</option>
+<option>gold</option>
+<option>yellow</option>
+<option>green</option>
+<option>aqua</option>
+<option>blue</option>
+<option>light_purple</option>
+<option>dark_red</option>
+<option>dark_green</option>
+<option>dark_aqua</option>
+<option>dark_blue</option>
+<option>dark_purple</option>
+<option>gray</option>
+<option>dark_gray</option>
+<option>black</option>
 </select>
 
-<label>Duration (seconds)</label>
+</div>
 
-<input
-id="duration"
-type="number"
-value="60"
->
+<div class="field">
+<label>Bold</label>
 
-<label>Amplifier</label>
+<select id="tb">
+<option value="false">No</option>
+<option value="true">Yes</option>
+</select>
 
-<input
-id="amplifier"
-type="number"
-value="1"
->
+</div>
 
-<button class="generate" onclick="generatePotion()">
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="btns">
+
+<button class="btn primary" onclick="genTellraw()">
 Generate
 </button>
 
-<div class="output" id="potionOutput">
-
-<textarea id="potionResult" readonly></textarea>
-
-<button class="copy" onclick="copyText('potionResult')">
-📋 Copy
+<button class="btn" onclick="copyOut('tro')">
+Copy
 </button>
 
 </div>
 
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     COLOURS
-===================================================== -->
-
-<section id="colors" class="page">
-
-<h1>🌈 Minecraft Colours</h1>
-
-<div class="subtitle">
-Click any code to copy it.
-</div>
-
-<div class="color-grid">
-
-<div class="color" onclick="copyCode('&0')">&0 Black</div>
-<div class="color" onclick="copyCode('&1')">&1 Dark Blue</div>
-<div class="color" onclick="copyCode('&2')">&2 Dark Green</div>
-<div class="color" onclick="copyCode('&3')">&3 Dark Aqua</div>
-<div class="color" onclick="copyCode('&4')">&4 Dark Red</div>
-<div class="color" onclick="copyCode('&5')">&5 Purple</div>
-<div class="color" onclick="copyCode('&6')">&6 Gold</div>
-<div class="color" onclick="copyCode('&7')">&7 Gray</div>
-<div class="color" onclick="copyCode('&8')">&8 Dark Gray</div>
-<div class="color" onclick="copyCode('&9')">&9 Blue</div>
-<div class="color" onclick="copyCode('&a')">&a Green</div>
-<div class="color" onclick="copyCode('&b')">&b Aqua</div>
-<div class="color" onclick="copyCode('&c')">&c Red</div>
-<div class="color" onclick="copyCode('&d')">&d Pink</div>
-<div class="color" onclick="copyCode('&e')">&e Yellow</div>
-<div class="color" onclick="copyCode('&f')">&f White</div>
-<div class="color" onclick="copyCode('&k')">&k Magic</div>
-<div class="color" onclick="copyCode('&l')">&l Bold</div>
-<div class="color" onclick="copyCode('&m')">&m Strike</div>
-<div class="color" onclick="copyCode('&n')">&n Underline</div>
-<div class="color" onclick="copyCode('&o')">&o Italic</div>
-<div class="color" onclick="copyCode('&r')">&r Reset</div>
+<pre class="output" id="tro"></pre>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     DOWNLOADS
-===================================================== -->
+<section class="page" id="colours">
 
-<section id="downloads" class="page">
-
-<h1>📥 Downloads</h1>
-
-<div class="subtitle">
-Fire Hub downloads.
+<div class="head">
+<div>
+<h2>🎨 Colours</h2>
+<p>Click a code to copy it.</p>
+</div>
 </div>
 
 <div class="panel">
 
-<h2>🔥 Fire Client</h2>
+<div class="colors" id="colors"></div>
 
-<p>
-Your Fire Client download can go here.
-</p>
-
-<a class="download" href="#">
-🔥 Download Client
-</a>
-
-
-<h2>🎨 Fire Textures</h2>
-
-<p>
-Your custom texture packs.
-</p>
-
-<a class="download" href="#">
-🎨 Download Textures
-</a>
-
-
-<h2>🗺️ Maps</h2>
-
-<p>
-Custom Minecraft maps.
-</p>
-
-<a class="download" href="#">
-🗺️ Download Maps
-</a>
+<pre class="output" id="preview">Fire Hub &c&lEXAMPLE&r</pre>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+<section class="page" id="downloads">
 
-<section id="about" class="page">
-
-<h1>🔥 About Fire Hub</h1>
+<div class="head">
+<div>
+<h2>⬇️ Downloads</h2>
+<p>Your future Fire Hub downloads.</p>
+</div>
+</div>
 
 <div class="panel">
 
-<h2>Fire Hub</h2>
+<h3>🔥 Fire Client</h3>
 
-<p>
-A collection of Minecraft tools, generators, downloads
-and projects.
+<p class="muted">
+Put your real GitHub Release download here later.
 </p>
 
-<p>
-Supported command versions:
-1.8, 1.12, 1.16, 1.20 and 1.21.
+<a class="btn primary"
+href="#"
+onclick="placeholder(event,'Fire Client')">
+Download Fire Client
+</a>
+
+<br><br>
+
+<h3>🎨 Fire Textures</h3>
+
+<p class="muted">
+Put your texture-pack download here later.
+</p>
+
+<a class="btn"
+href="#"
+onclick="placeholder(event,'Fire Textures')">
+Download Textures
+</a>
+
+</div>
+
+</section>
+
+
+<section class="page" id="about">
+
+<div class="head">
+<div>
+<h2>ℹ️ About Fire Hub</h2>
+<p>Your Minecraft tools website.</p>
+</div>
+</div>
+
+<div class="panel">
+
+<p class="muted">
+Fire Hub is a browser-based Minecraft command toolkit.
+Everything on this page runs directly in your browser.
+</p>
+
+<p class="muted">
+Always test generated commands on the exact Minecraft version
+you are using.
 </p>
 
 </div>
 
 </section>
 
+
+<div class="footer">
+🔥 Fire Hub • GitHub Pages
+</div>
 
 </main>
 </div>
@@ -1386,1583 +1417,1421 @@ Supported command versions:
 
 <script>
 
-/* =========================================================
-   FIRE HUB JAVASCRIPT
-========================================================= */
+const $=id=>document.getElementById(id);
 
+function toast(message){
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+  const t=$("toast");
 
-function page(id,button){
+  t.textContent=message;
+  t.classList.add("show");
 
-    document.querySelectorAll(".page").forEach(function(p){
-        p.classList.remove("active");
-    });
+  clearTimeout(window.toastTimer);
 
-    const target=document.getElementById(id);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    if(button){
-
-        document.querySelectorAll(".nav").forEach(function(n){
-            n.classList.remove("active");
-        });
-
-        button.classList.add("active");
-    }
+  window.toastTimer=setTimeout(()=>{
+    t.classList.remove("show");
+  },1800);
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+function showPage(id){
 
-let toastTimer;
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
 
-function showToast(message){
+  document.querySelectorAll(".nav")
+    .forEach(b=>b.classList.remove("active"));
 
-    const toast=document.getElementById("toast");
+  const target=$(id);
 
-    toast.textContent=message;
-    toast.style.display="block";
+  if(target){
+    target.classList.add("active");
+  }
 
-    clearTimeout(toastTimer);
+  const nav=
+    document.querySelector('.nav[data-page="'+id+'"]');
 
-    toastTimer=setTimeout(function(){
+  if(nav){
+    nav.classList.add("active");
+  }
 
-        toast.style.display="none";
-
-    },1800);
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
 
-/* =========================================================
-   VERSION
-========================================================= */
+document.querySelectorAll(".nav").forEach(button=>{
 
-function getVersion(){
+  button.addEventListener("click",()=>{
 
-    return document.getElementById("globalVersion").value;
+    showPage(button.dataset.page);
 
-}
+  });
 
-
-function versionChanged(){
-
-    const version=getVersion();
-
-    document.getElementById(
-        "villagerVersionDisplay"
-    ).textContent=version;
-
-    showToast("Minecraft "+version+" selected");
-
-}
+});
 
 
-/* =========================================================
-   COPY
-========================================================= */
+function copyValue(value){
 
-function copyText(id){
+  if(!value){
+    toast("Nothing to copy");
+    return;
+  }
 
-    const element=document.getElementById(id);
+  if(navigator.clipboard){
 
-    navigator.clipboard.writeText(element.value)
-    .then(function(){
+    navigator.clipboard.writeText(value)
+      .then(()=>toast("📋 Copied!"));
 
-        showToast("📋 Copied!");
+  }else{
 
-    })
-    .catch(function(){
+    const box=document.createElement("textarea");
 
-        element.select();
-        document.execCommand("copy");
+    box.value=value;
 
-        showToast("📋 Copied!");
+    document.body.appendChild(box);
 
-    });
+    box.select();
+
+    document.execCommand("copy");
+
+    box.remove();
+
+    toast("📋 Copied!");
+
+  }
 
 }
 
 
-function copyCode(code){
+function copyOut(id){
 
-    navigator.clipboard.writeText(code)
-    .then(function(){
-
-        showToast("Copied "+code);
-
-    });
+  copyValue($(id).textContent.trim());
 
 }
 
 
-/* =========================================================
-   BASIC COMMAND
-========================================================= */
+function version(){
 
-function generateCommand(){
-
-    let command=
-        document.getElementById("customCommand")
-        .value.trim();
-
-    if(!command){
-        command="/say Fire Hub";
-    }
-
-    document.getElementById("commandResult").value=command;
-
-    document.getElementById(
-        "commandOutput"
-    ).style.display="block";
+  return $("version").value;
 
 }
 
 
-/* =========================================================
-   GIVE GENERATOR
-========================================================= */
+function cleanItem(value){
 
-function generateGive(){
-
-    const version=getVersion();
-
-    const item=
-        cleanItem(
-            document.getElementById("giveItem").value
-        ) || "diamond";
-
-    const amount=
-        Math.max(
-            1,
-            Number(
-                document.getElementById("giveAmount").value
-            ) || 1
-        );
-
-    const name=
-        document.getElementById("giveName").value.trim();
-
-    const enchantments=
-        parseEnchantments(
-            document.getElementById("giveEnchant").value
-        );
-
-
-    let command="";
-
-
-    if(version==="1.21"){
-
-        let components=[];
-
-        if(name){
-
-            components.push(
-                "minecraft:custom_name='"+
-                jsonText(name)+
-                "'"
-            );
-
-        }
-
-        if(enchantments.length){
-
-            let levels=[];
-
-            enchantments.forEach(function(e){
-
-                levels.push(
-                    "minecraft:"+
-                    e.id+
-                    ":"+
-                    e.level
-                );
-
-            });
-
-            components.push(
-                "minecraft:enchantments={levels:{"+
-                levels.join(",")+
-                "}}"
-            );
-
-        }
-
-        command=
-            "/give @p minecraft:"+
-            item;
-
-        if(components.length){
-
-            command+=
-                "["+
-                components.join(",")+
-                "]";
-
-        }
-
-        command+=" "+amount;
-
-    }
-
-    else{
-
-        command=
-            "/give @p minecraft:"+
-            item+
-            " "+
-            amount;
-
-        let nbt=[];
-
-        if(name){
-
-            nbt.push(
-                "display:{Name:"+
-                jsonText(name)+
-                "}"
-            );
-
-        }
-
-        if(enchantments.length){
-
-            let list=[];
-
-            enchantments.forEach(function(e){
-
-                list.push(
-                    "{id:\"minecraft:"+
-                    e.id+
-                    "\",lvl:"+
-                    e.level+
-                    "s}"
-                );
-
-            });
-
-            nbt.push(
-                "ench:["+
-                list.join(",")+
-                "]"
-            );
-
-        }
-
-        if(nbt.length){
-
-            command+=" {"+nbt.join(",")+"}";
-
-        }
-
-    }
-
-
-    document.getElementById("giveResult").value=command;
-
-    document.getElementById(
-        "giveOutput"
-    ).style.display="block";
+  return String(value||"")
+    .trim()
+    .replace(/^minecraft:/i,"");
 
 }
 
 
-/* =========================================================
-   SUMMON GENERATOR
-========================================================= */
+function quote(text){
 
-function generateSummon(){
-
-    const mob=
-        cleanItem(
-            document.getElementById("mob").value
-        );
-
-    const name=
-        document.getElementById("mobName").value.trim();
-
-    const health=
-        Number(
-            document.getElementById("mobHealth").value
-        ) || 20;
-
-    const inv=
-        document.getElementById("invulnerable").value;
-
-
-    let parts=[];
-
-
-    if(name){
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-    }
-
-    parts.push(
-        "Health:"+
-        health+
-        "f"
-    );
-
-    parts.push(
-        "Invulnerable:"+
-        inv
-    );
-
-
-    const command=
-        "/summon minecraft:"+
-        mob+
-        " ~ ~ ~ {"+
-        parts.join(",")+
-        "}";
-
-
-    document.getElementById(
-        "summonResult"
-    ).value=command;
-
-    document.getElementById(
-        "summonOutput"
-    ).style.display="block";
+  return '"'+String(text)
+    .replace(/\\/g,"\\\\")
+    .replace(/"/g,'\\"')+
+    '"';
 
 }
 
 
-/* =========================================================
-   VILLAGER DATA
-========================================================= */
+/* ================= GIVE ================= */
 
-let trades=[];
-let tradeID=0;
+function genGive(){
 
+  const target=
+    $("gt").value.trim()||"@p";
 
-/* =========================================================
-   ADD TRADE
-========================================================= */
+  const item=
+    cleanItem($("gi").value)||"stone";
 
-function addTrade(data){
+  const amount=
+    Math.max(1,+$("ga").value||1);
 
-    const id=tradeID++;
+  const name=
+    $("gn").value.trim();
 
+  const extra=
+    $("gx").value.trim();
 
-    const trade=data || {
-
-        cost1:"emerald",
-        cost1Amount:1,
-
-        cost2:"",
-        cost2Amount:1,
-
-        reward:"diamond",
-        rewardAmount:1,
-
-        maxUses:999999,
-        xp:10,
-
-        priceMultiplier:0.05,
-
-        disabled:false
-
-    };
+  let command=
+    "/give "+target+
+    " minecraft:"+item+
+    " "+amount;
 
 
-    trades.push({
-        id:id,
-        ...trade
-    });
-
-
-    renderTrades();
-
-}
-
-
-/* =========================================================
-   REMOVE TRADE
-========================================================= */
-
-function removeTrade(id){
-
-    trades=
-        trades.filter(function(t){
-
-            return t.id!==id;
-
-        });
-
-
-    renderTrades();
-
-}
-
-
-/* =========================================================
-   MOVE TRADE
-========================================================= */
-
-function moveTrade(id,direction){
-
-    const index=
-        trades.findIndex(function(t){
-
-            return t.id===id;
-
-        });
-
-
-    if(index<0)return;
-
-
-    const newIndex=
-        index+direction;
-
+  if(name||extra){
 
     if(
-        newIndex<0 ||
-        newIndex>=trades.length
+      version()==="1.20.5+" ||
+      version()==="1.21+"
     ){
 
-        return;
+      const components=[];
+
+      if(name){
+
+        components.push(
+          "minecraft:custom_name='"+
+          JSON.stringify({
+            text:name
+          })+
+          "'"
+        );
+
+      }
+
+      if(extra){
+
+        components.push(
+          extra.replace(/^\{|\}$/g,"")
+        );
+
+      }
+
+      command=
+        "/give "+target+
+        " minecraft:"+item+
+        " "+amount+
+        (components.length
+          ? "["+components.join(",")+"]"
+          :"");
+
+    }else{
+
+      const nbt=[];
+
+      if(name){
+
+        nbt.push(
+          "display:{Name:"+
+          quote(name)+
+          "}"
+        );
+
+      }
+
+      if(extra){
+
+        nbt.push(
+          extra.replace(/^\{|\}$/g,"")
+        );
+
+      }
+
+      command=
+        "/give "+target+
+        " minecraft:"+item+
+        " "+amount+
+        (nbt.length
+          ?" {"+nbt.join(",")+"}"
+          :"");
 
     }
 
-
-    const temp=trades[index];
-
-    trades[index]=trades[newIndex];
-
-    trades[newIndex]=temp;
+  }
 
 
-    renderTrades();
+  $("go").textContent=command;
 
 }
 
 
-/* =========================================================
-   RESET TRADES
-========================================================= */
+/* ================= SUMMON ================= */
 
-function resetTrades(){
+function genSummon(){
 
-    if(!confirm("Reset all trades?")){
+  const mob=
+    $("sm").value.trim()||"minecraft:zombie";
 
-        return;
+  const pos=
+    $("sp").value.trim()||"~ ~ ~";
+
+  const name=
+    $("sn").value.trim();
+
+  const health=
+    $("sh").value.trim();
+
+  const extra=
+    $("sx").value.trim();
+
+  const parts=[];
+
+
+  if(name){
+
+    parts.push(
+      "CustomName:"+quote(name)
+    );
+
+  }
+
+  if(health){
+
+    parts.push(
+      "Health:"+health+"f"
+    );
+
+  }
+
+  if($("sai").checked){
+
+    parts.push("NoAI:1b");
+
+  }
+
+  if($("sinv").checked){
+
+    parts.push("Invulnerable:1b");
+
+  }
+
+  if($("ssi").checked){
+
+    parts.push("Silent:1b");
+
+  }
+
+  if(extra){
+
+    parts.push(
+      extra.replace(/^\{|\}$/g,"")
+    );
+
+  }
+
+
+  $("so").textContent=
+    "/summon "+
+    mob+
+    " "+
+    pos+
+    (parts.length
+      ?" {"+parts.join(",")+"}"
+      :"");
+
+}
+
+
+/* ================= EXECUTE ================= */
+
+function genExecute(){
+
+  const selector=
+    $("es").value;
+
+  const run=
+    $("er").value.trim()||
+    "say Hello";
+
+  const pattern=
+    $("ec").value;
+
+
+  let command;
+
+
+  if(
+    version()==="1.8"||
+    version()==="1.12.2"
+  ){
+
+    command=
+      "/execute "+
+      selector+
+      " ~ ~ ~ "+
+      run;
+
+  }else{
+
+    if(pattern==="at"){
+
+      command=
+        "/execute at "+
+        selector+
+        " run "+
+        run;
+
+    }else if(pattern==="asat"){
+
+      command=
+        "/execute as "+
+        selector+
+        " at "+
+        selector+
+        " run "+
+        run;
+
+    }else if(pattern==="if"){
+
+      command=
+        "/execute if entity "+
+        selector+
+        " run "+
+        run;
+
+    }else{
+
+      command=
+        "/execute as "+
+        selector+
+        " run "+
+        run;
 
     }
 
-
-    trades=[];
-    tradeID=0;
-
-    addTrade({
-
-        cost1:"emerald",
-        cost1Amount:1,
-
-        cost2:"",
-        cost2Amount:1,
-
-        reward:"diamond",
-        rewardAmount:1,
-
-        maxUses:999999,
-        xp:10,
-
-        priceMultiplier:0.05,
-
-        disabled:false
-
-    });
+  }
 
 
-    showToast("Trades reset");
+  $("eo").textContent=command;
 
 }
 
 
-/* =========================================================
-   UPDATE TRADE
-========================================================= */
+/* ================= FILL ================= */
 
-function updateTrade(id,key,value){
+function genFill(){
 
-    const trade=
-        trades.find(function(t){
+  const from=
+    $("ff").value.trim()||
+    "~ ~ ~";
 
-            return t.id===id;
+  const to=
+    $("ft").value.trim()||
+    "~ ~ ~";
 
-        });
+  const block=
+    $("fb").value.trim()||
+    "minecraft:stone";
+
+  const mode=
+    $("fm").value;
 
 
-    if(!trade)return;
-
-    trade[key]=value;
+  $("fo").textContent=
+    "/fill "+
+    from+
+    " "+
+    to+
+    " "+
+    block+
+    " "+
+    mode;
 
 }
 
 
-/* =========================================================
-   RENDER TRADES
-========================================================= */
+/* ================= EFFECT ================= */
+
+function genEffect(){
+
+  const target=
+    $("et").value.trim()||
+    "@p";
+
+  const effect=
+    $("en").value.trim()||
+    "minecraft:speed";
+
+
+  if($("em").value==="clear"){
+
+    $("effo").textContent=
+      "/effect clear "+
+      target+
+      " "+
+      effect;
+
+    return;
+
+  }
+
+
+  const duration=
+    Math.max(
+      1,
+      +$("ed").value||30
+    );
+
+  const amplifier=
+    Math.max(
+      0,
+      (+$("ea").value||1)-1
+    );
+
+
+  if(
+    version()==="1.8"||
+    version()==="1.12.2"
+  ){
+
+    $("effo").textContent=
+      "/effect "+
+      target+
+      " "+
+      effect+
+      " "+
+      duration+
+      " "+
+      amplifier;
+
+  }else{
+
+    $("effo").textContent=
+      "/effect give "+
+      target+
+      " "+
+      effect+
+      " "+
+      duration+
+      " "+
+      amplifier;
+
+  }
+
+}
+
+
+/* ================= ENCHANT ================= */
+
+function genEnchant(){
+
+  $("xo").textContent=
+    "/enchant "+
+    ($("xt").value.trim()||"@p")+
+    " "+
+    ($("xn").value.trim()||"minecraft:sharpness")+
+    " "+
+    Math.max(
+      1,
+      +$("xl").value||1
+    );
+
+}
+
+
+/* =====================================================
+   VILLAGER GENERATOR
+===================================================== */
+
+let trades=[
+
+  {
+    in1:"minecraft:emerald",
+    a1:1,
+    in2:"",
+    a2:0,
+    out:"minecraft:diamond",
+    ao:1,
+    uses:999999,
+    xp:10,
+    mult:0.05,
+    disabled:false
+  },
+
+  {
+    in1:"minecraft:emerald",
+    a1:32,
+    in2:"",
+    a2:0,
+    out:"minecraft:diamond_sword",
+    ao:1,
+    uses:999999,
+    xp:20,
+    mult:0.05,
+    disabled:false
+  }
+
+];
+
 
 function renderTrades(){
 
-    const list=
-        document.getElementById("tradeList");
+  const wrap=$("trades");
 
-    list.innerHTML="";
-
-
-    trades.forEach(function(t,index){
-
-        const card=
-            document.createElement("div");
-
-        card.className="trade-card";
+  wrap.innerHTML="";
 
 
-        card.innerHTML=`
+  trades.forEach((t,index)=>{
 
-<div class="trade-header">
+    const card=
+      document.createElement("div");
 
-    <div class="trade-title">
-        🛒 Trade ${index+1}
-    </div>
+    card.className="trade";
 
-    <div class="trade-actions">
 
-        <button
-            class="move-btn"
-            onclick="moveTrade(${t.id},-1)"
-            title="Move up">
+    card.innerHTML=`
+
+      <div class="tradehead">
+
+        <strong>
+          🛒 Trade ${index+1}
+        </strong>
+
+        <div class="trade-actions">
+
+          <button class="btn small"
+            data-up>
             ↑
-        </button>
+          </button>
 
-        <button
-            class="move-btn"
-            onclick="moveTrade(${t.id},1)"
-            title="Move down">
+          <button class="btn small"
+            data-down>
             ↓
-        </button>
+          </button>
 
-        <button
-            class="danger"
-            onclick="removeTrade(${t.id})">
-            🗑
-        </button>
+          <button class="btn small danger"
+            data-remove>
+            Remove
+          </button>
 
-    </div>
+        </div>
 
-</div>
-
-
-<div class="trade-grid">
+      </div>
 
 
-<div class="item-box">
+      <div class="form">
 
-<h4>🟩 Cost #1</h4>
+        <div class="field">
+          <label>Cost #1 item</label>
+          <input data-k="in1"
+            value="${t.in1}">
+        </div>
 
-<label>Item ID</label>
-
-<input
-value="${safeAttr(t.cost1)}"
-oninput="updateTrade(${t.id},'cost1',this.value)"
-placeholder="emerald"
->
-
-<label>Amount</label>
-
-<input
-type="number"
-min="1"
-value="${safeAttr(t.cost1Amount)}"
-oninput="updateTrade(${t.id},'cost1Amount',this.value)"
->
-
-</div>
+        <div class="field">
+          <label>Amount</label>
+          <input data-k="a1"
+            type="number"
+            min="1"
+            value="${t.a1}">
+        </div>
 
 
-<div class="item-box">
+        <div class="field">
+          <label>Cost #2 item (optional)</label>
+          <input data-k="in2"
+            value="${t.in2}">
+        </div>
 
-<h4>🟩 Cost #2</h4>
-
-<label>Optional Item</label>
-
-<input
-value="${safeAttr(t.cost2)}"
-oninput="updateTrade(${t.id},'cost2',this.value)"
-placeholder="diamond"
->
-
-<label>Amount</label>
-
-<input
-type="number"
-min="1"
-value="${safeAttr(t.cost2Amount)}"
-oninput="updateTrade(${t.id},'cost2Amount',this.value)"
->
-
-</div>
+        <div class="field">
+          <label>Amount</label>
+          <input data-k="a2"
+            type="number"
+            min="0"
+            value="${t.a2}">
+        </div>
 
 
-<div class="item-box">
+        <div class="field">
+          <label>Reward item</label>
+          <input data-k="out"
+            value="${t.out}">
+        </div>
 
-<h4>🟦 Reward</h4>
-
-<label>Item ID</label>
-
-<input
-value="${safeAttr(t.reward)}"
-oninput="updateTrade(${t.id},'reward',this.value)"
-placeholder="diamond_sword"
->
-
-<label>Amount</label>
-
-<input
-type="number"
-min="1"
-value="${safeAttr(t.rewardAmount)}"
-oninput="updateTrade(${t.id},'rewardAmount',this.value)"
->
-
-</div>
+        <div class="field">
+          <label>Reward amount</label>
+          <input data-k="ao"
+            type="number"
+            min="1"
+            value="${t.ao}">
+        </div>
 
 
-</div>
+        <div class="field">
+          <label>Max uses</label>
+          <input data-k="uses"
+            type="number"
+            min="1"
+            value="${t.uses}">
+        </div>
 
 
-<div class="trade-options">
+        <div class="field">
+          <label>Villager XP</label>
+          <input data-k="xp"
+            type="number"
+            min="0"
+            value="${t.xp}">
+        </div>
 
 
-<div>
-
-<label>Max Uses</label>
-
-<input
-type="number"
-min="1"
-value="${safeAttr(t.maxUses)}"
-oninput="updateTrade(${t.id},'maxUses',this.value)"
->
-
-</div>
+        <div class="field">
+          <label>Price multiplier</label>
+          <input data-k="mult"
+            type="number"
+            step="0.01"
+            value="${t.mult}">
+        </div>
 
 
-<div>
+        <div class="field">
 
-<label>Villager XP</label>
+          <label class="check">
 
-<input
-type="number"
-min="0"
-value="${safeAttr(t.xp)}"
-oninput="updateTrade(${t.id},'xp',this.value)"
->
+            <input data-k="disabled"
+              type="checkbox"
+              ${t.disabled?"checked":""}>
 
-</div>
+            Disabled trade
 
+          </label>
 
-<div>
+        </div>
 
-<label>Price Multiplier</label>
+      </div>
 
-<input
-type="number"
-step="0.01"
-min="0"
-value="${safeAttr(t.priceMultiplier)}"
-oninput="updateTrade(${t.id},'priceMultiplier',this.value)"
->
-
-</div>
+    `;
 
 
-<label class="checkbox">
+    card
+      .querySelectorAll("[data-k]")
+      .forEach(input=>{
 
-<input
-type="checkbox"
-${t.disabled?"checked":""}
-onchange="updateTrade(${t.id},'disabled',this.checked)"
->
+        input.addEventListener(
+          "input",
+          ()=>{
 
-Disabled
+            const key=
+              input.dataset.k;
 
-</label>
-
-
-</div>
-`;
-
-
-        list.appendChild(card);
-
-    });
+            let value=
+              input.type==="checkbox"
+                ?input.checked
+                :input.value;
 
 
-    const count=trades.length;
+            if(
+              [
+                "a1",
+                "a2",
+                "ao",
+                "uses",
+                "xp",
+                "mult"
+              ].includes(key)
+            ){
+
+              value=
+                Number(value)||0;
+
+            }
 
 
-    document.getElementById(
-        "tradeCount"
-    ).textContent=
-        count+
-        (count===1?" trade":" trades");
+            t[key]=value;
+
+          }
+        );
+
+      });
+
+
+    card
+      .querySelector("[data-up]")
+      .onclick=()=>{
+
+        if(index>0){
+
+          [
+            trades[index-1],
+            trades[index]
+          ]=[
+            trades[index],
+            trades[index-1]
+          ];
+
+          renderTrades();
+
+        }
+
+      };
+
+
+    card
+      .querySelector("[data-down]")
+      .onclick=()=>{
+
+        if(index<trades.length-1){
+
+          [
+            trades[index],
+            trades[index+1]
+          ]=[
+            trades[index+1],
+            trades[index]
+          ];
+
+          renderTrades();
+
+        }
+
+      };
+
+
+    card
+      .querySelector("[data-remove]")
+      .onclick=()=>{
+
+        if(trades.length===1){
+
+          toast(
+            "Keep at least one trade"
+          );
+
+          return;
+
+        }
+
+        trades.splice(index,1);
+
+        renderTrades();
+
+      };
+
+
+    wrap.appendChild(card);
+
+  });
 
 }
 
 
-/* =========================================================
-   OLD ITEM STACK
-   Used by older Minecraft versions.
-========================================================= */
+function addTrade(){
 
-function oldItemStack(item,amount){
+  trades.push({
 
-    return (
-        "{id:\"minecraft:"+
-        cleanItem(item)+
-        "\",Count:"+
-        Math.max(1,Number(amount)||1)+
-        "b}"
-    );
+    in1:"minecraft:emerald",
+    a1:1,
+
+    in2:"",
+    a2:0,
+
+    out:"minecraft:diamond",
+    ao:1,
+
+    uses:
+      Number($("vu").value)||
+      999999,
+
+    xp:
+      Number($("vx").value)||
+      10,
+
+    mult:0.05,
+
+    disabled:false
+
+  });
+
+
+  renderTrades();
+
+  toast("Trade added");
 
 }
 
 
-/* =========================================================
-   MODERN ITEM STACK
-   Used by 1.20.5+ / 1.21 style.
-========================================================= */
+function resetTrades(){
 
-function modernItemStack(item,amount){
+  trades=[
 
-    return (
-        "{id:\"minecraft:"+
-        cleanItem(item)+
-        "\",count:"+
-        Math.max(1,Number(amount)||1)+
-        "}"
-    );
+    {
+      in1:"minecraft:emerald",
+      a1:1,
+      in2:"",
+      a2:0,
+      out:"minecraft:diamond",
+      ao:1,
+      uses:999999,
+      xp:10,
+      mult:0.05,
+      disabled:false
+    }
+
+  ];
+
+  renderTrades();
+
+  toast("Trades reset");
 
 }
 
 
-/* =========================================================
-   VILLAGER PROFESSION
-========================================================= */
+function oldItem(id,count){
 
-const oldProfessionNumbers={
+  return(
+    '{id:"minecraft:'+
+    cleanItem(id)+
+    '",Count:'+
+    Math.max(1,Number(count)||1)+
+    'b}'
+  );
 
-    none:0,
-    armorer:3,
-    butcher:4,
-    cartographer:5,
-    cleric:6,
-    farmer:0,
-    fisherman:0,
-    fletcher:0,
-    leatherworker:0,
-    librarian:1,
-    mason:0,
-    shepherd:0,
-    toolsmith:3,
-    weaponsmith:2
+}
+
+
+function modernItem(id,count){
+
+  return(
+    '{id:"minecraft:'+
+    cleanItem(id)+
+    '",count:'+
+    Math.max(1,Number(count)||1)+
+    '}'
+  );
+
+}
+
+
+const professionNumbers={
+
+  none:0,
+  farmer:0,
+  fisherman:0,
+  shepherd:0,
+  fletcher:0,
+  librarian:1,
+  cartographer:1,
+  cleric:2,
+  armorer:3,
+  toolsmith:3,
+  weaponsmith:3,
+  butcher:4,
+  leatherworker:4,
+  mason:3
 
 };
 
 
-/*
- * For 1.8/1.12 the old profession system is numeric.
- *
- * 1.8 and 1.12 also have differences in how villagers
- * internally store some profession data, so the generator
- * uses the classic Profession field and leaves the trade
- * structure in the classic Recipes format.
- */
+function oldTrade(t){
 
-
-/* =========================================================
-   GENERATE OLD TRADE
-========================================================= */
-
-function generateOldTrade(t){
-
-    let result=
-        "{buy:"+
-        oldItemStack(
-            t.cost1,
-            t.cost1Amount
-        );
-
-
-    if(t.cost2){
-
-        result+=
-            ",buyB:"+
-            oldItemStack(
-                t.cost2,
-                t.cost2Amount
-            );
-
-    }
-
-
-    result+=
-        ",sell:"+
-        oldItemStack(
-            t.reward,
-            t.rewardAmount
-        );
-
-
-    result+=
-        ",maxUses:"+
-        Math.max(
-            1,
-            Number(t.maxUses)||999999
-        );
-
-
-    result+=
-        ",rewardExp:"+
-        (Number(t.xp)>0?"true":"false");
-
-
-    result+="}";
-
-
-    return result;
+  return(
+    '{buy:'+
+    oldItem(t.in1,t.a1)+
+    (t.in2
+      ?',buyB:'+
+       oldItem(t.in2,t.a2)
+      :'')+
+    ',sell:'+
+    oldItem(t.out,t.ao)+
+    ',maxUses:'+
+    Math.max(
+      1,
+      Number(t.uses)||999999
+    )+
+    ',rewardExp:'+
+    (t.disabled
+      ?"0b"
+      :"1b")+
+    '}'
+  );
 
 }
 
 
-/* =========================================================
-   GENERATE MODERN TRADE 1.14 - 1.20.4
-========================================================= */
+function midTrade(t){
 
-function generateModernTrade(t){
-
-    let result=
-        "{buy:"+
-        oldItemStack(
-            t.cost1,
-            t.cost1Amount
-        );
-
-
-    if(t.cost2){
-
-        result+=
-            ",buyB:"+
-            oldItemStack(
-                t.cost2,
-                t.cost2Amount
-            );
-
-    }
-
-
-    result+=
-        ",sell:"+
-        oldItemStack(
-            t.reward,
-            t.rewardAmount
-        );
-
-
-    result+=
-        ",maxUses:"+
-        Math.max(
-            1,
-            Number(t.maxUses)||999999
-        );
-
-
-    result+=
-        ",rewardExp:"+
-        (Number(t.xp)>0?"true":"false");
-
-
-    result+=
-        ",xp:"+
-        Math.max(
-            0,
-            Number(t.xp)||0
-        );
-
-
-    result+=
-        ",priceMultiplier:"+
-        Number(t.priceMultiplier||0.05);
-
-
-    result+="}";
-
-
-    return result;
+  return(
+    '{buy:'+
+    oldItem(t.in1,t.a1)+
+    (t.in2
+      ?',buyB:'+
+       oldItem(t.in2,t.a2)
+      :'')+
+    ',sell:'+
+    oldItem(t.out,t.ao)+
+    ',maxUses:'+
+    Math.max(
+      1,
+      Number(t.uses)||999999
+    )+
+    ',rewardExp:'+
+    (t.disabled
+      ?"0b"
+      :"1b")+
+    ',xp:'+
+    Math.max(
+      0,
+      Number(t.xp)||0
+    )+
+    ',priceMultiplier:'+
+    (Number(t.mult)||0.05)+
+    '}'
+  );
 
 }
 
 
-/* =========================================================
-   GENERATE 1.20.5 / 1.21 TRADE
-========================================================= */
+function newTrade(t){
 
-function generateLatestTrade(t){
-
-    let result=
-        "{buy:"+
-        modernItemStack(
-            t.cost1,
-            t.cost1Amount
-        );
-
-
-    if(t.cost2){
-
-        result+=
-            ",buyB:"+
-            modernItemStack(
-                t.cost2,
-                t.cost2Amount
-            );
-
-    }
-
-
-    result+=
-        ",sell:"+
-        modernItemStack(
-            t.reward,
-            t.rewardAmount
-        );
-
-
-    result+=
-        ",maxUses:"+
-        Math.max(
-            1,
-            Number(t.maxUses)||999999
-        );
-
-
-    result+=
-        ",rewardExp:"+
-        (Number(t.xp)>0?"true":"false");
-
-
-    result+=
-        ",xp:"+
-        Math.max(
-            0,
-            Number(t.xp)||0
-        );
-
-
-    result+=
-        ",priceMultiplier:"+
-        Number(t.priceMultiplier||0.05);
-
-
-    /*
-     * Disabled trades are represented using high demand.
-     * This makes them effectively unavailable without
-     * requiring a separate custom component.
-     */
-
-    if(t.disabled){
-
-        result+=
-            ",demand:999999";
-
-    }
-
-
-    result+="}";
-
-
-    return result;
+  return(
+    '{buy:'+
+    modernItem(t.in1,t.a1)+
+    (t.in2
+      ?',buyB:'+
+       modernItem(t.in2,t.a2)
+      :'')+
+    ',sell:'+
+    modernItem(t.out,t.ao)+
+    ',max_uses:'+
+    Math.max(
+      1,
+      Number(t.uses)||999999
+    )+
+    ',reward_exp_xp:'+
+    (t.disabled?0:1)+
+    ',xp:'+
+    Math.max(
+      0,
+      Number(t.xp)||0
+    )+
+    ',price_multiplier:'+
+    (Number(t.mult)||0.05)+
+    '}'
+  );
 
 }
 
 
-/* =========================================================
-   GENERATE VILLAGER
-========================================================= */
-
-function generateVillager(){
-
-    if(trades.length===0){
-
-        showToast("Add at least one trade!");
-
-        return;
-
-    }
-
-
-    const version=getVersion();
-
-
-    const name=
-        document.getElementById(
-            "villagerName"
-        ).value.trim() ||
-        "Fire Trader";
-
-
-    const profession=
-        document.getElementById(
-            "profession"
-        ).value;
-
-
-    const level=
-        Number(
-            document.getElementById(
-                "villagerLevel"
-            ).value
-        ) || 5;
-
-
-    const type=
-        document.getElementById(
-            "villagerType"
-        ).value;
-
-
-    const noAI=
-        document.getElementById(
-            "villagerNoAI"
-        ).checked;
-
-
-    const invulnerable=
-        document.getElementById(
-            "villagerInvulnerable"
-        ).checked;
-
-
-    const silent=
-        document.getElementById(
-            "villagerSilent"
-        ).checked;
-
-
-    let command="";
-
-
-    /* =====================================================
-       1.8
-    ===================================================== */
-
-    if(version==="1.8"){
-
-        const recipes=
-            trades.map(
-                generateOldTrade
-            ).join(",");
-
-
-        let parts=[];
-
-
-        parts.push(
-            "Profession:"+
-            (
-                oldProfessionNumbers[
-                    profession
-                ] || 0
-            )
-        );
-
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-
-        parts.push(
-            "Offers:{Recipes:["+
-            recipes+
-            "]}"
-        );
-
-
-        if(noAI){
-            parts.push("NoAI:1b");
-        }
-
-
-        if(invulnerable){
-            parts.push("Invulnerable:1b");
-        }
-
-
-        if(silent){
-            parts.push("Silent:1b");
-        }
-
-
-        command=
-            "/summon Villager ~ ~ ~ {"+
-            parts.join(",")+
-            "}";
-
-    }
-
-
-    /* =====================================================
-       1.12
-    ===================================================== */
-
-    else if(version==="1.12"){
-
-        const recipes=
-            trades.map(
-                generateOldTrade
-            ).join(",");
-
-
-        let parts=[];
-
-
-        parts.push(
-            "Profession:"+
-            (
-                oldProfessionNumbers[
-                    profession
-                ] || 0
-            )
-        );
-
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-
-        parts.push(
-            "Offers:{Recipes:["+
-            recipes+
-            "]}"
-        );
-
-
-        if(noAI){
-            parts.push("NoAI:1b");
-        }
-
-
-        if(invulnerable){
-            parts.push("Invulnerable:1b");
-        }
-
-
-        if(silent){
-            parts.push("Silent:1b");
-        }
-
-
-        command=
-            "/summon villager ~ ~ ~ {"+
-            parts.join(",")+
-            "}";
-
-    }
-
-
-    /* =====================================================
-       1.16
-    ===================================================== */
-
-    else if(version==="1.16"){
-
-        const recipes=
-            trades.map(
-                generateModernTrade
-            ).join(",");
-
-
-        let parts=[];
-
-
-        parts.push(
-            "VillagerData:{profession:\"minecraft:"+
-            profession+
-            "\",level:"+
-            level+
-            ",type:\"minecraft:"+
-            type+
-            "\"}"
-        );
-
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-
-        parts.push(
-            "Offers:{Recipes:["+
-            recipes+
-            "]}"
-        );
-
-
-        if(noAI){
-            parts.push("NoAI:1b");
-        }
-
-
-        if(invulnerable){
-            parts.push("Invulnerable:1b");
-        }
-
-
-        if(silent){
-            parts.push("Silent:1b");
-        }
-
-
-        command=
-            "/summon minecraft:villager ~ ~ ~ {"+
-            parts.join(",")+
-            "}";
-
-    }
-
-
-    /* =====================================================
-       1.20
-    ===================================================== */
-
-    else if(version==="1.20"){
-
-        const recipes=
-            trades.map(
-                generateModernTrade
-            ).join(",");
-
-
-        let parts=[];
-
-
-        parts.push(
-            "VillagerData:{profession:\"minecraft:"+
-            profession+
-            "\",level:"+
-            level+
-            ",type:\"minecraft:"+
-            type+
-            "\"}"
-        );
-
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-
-        parts.push(
-            "Offers:{Recipes:["+
-            recipes+
-            "]}"
-        );
-
-
-        if(noAI){
-            parts.push("NoAI:1b");
-        }
-
-
-        if(invulnerable){
-            parts.push("Invulnerable:1b");
-        }
-
-
-        if(silent){
-            parts.push("Silent:1b");
-        }
-
-
-        command=
-            "/summon minecraft:villager ~ ~ ~ {"+
-            parts.join(",")+
-            "}";
-
-    }
-
-
-    /* =====================================================
-       1.21
-    ===================================================== */
-
-    else if(version==="1.21"){
-
-        const recipes=
-            trades.map(
-                generateLatestTrade
-            ).join(",");
-
-
-        let parts=[];
-
-
-        parts.push(
-            "VillagerData:{profession:\"minecraft:"+
-            profession+
-            "\",level:"+
-            level+
-            ",type:\"minecraft:"+
-            type+
-            "\"}"
-        );
-
-
-        parts.push(
-            "CustomName:"+
-            jsonText(name)
-        );
-
-
-        parts.push(
-            "Offers:{Recipes:["+
-            recipes+
-            "]}"
-        );
-
-
-        if(noAI){
-            parts.push("NoAI:1b");
-        }
-
-
-        if(invulnerable){
-            parts.push("Invulnerable:1b");
-        }
-
-
-        if(silent){
-            parts.push("Silent:1b");
-        }
-
-
-        command=
-            "/summon minecraft:villager ~ ~ ~ {"+
-            parts.join(",")+
-            "}";
-
-    }
-
-
-    document.getElementById(
-        "villagerResult"
-    ).value=command;
-
-
-    document.getElementById(
-        "villagerOutput"
-    ).style.display="block";
-
-
-    showToast(
-        "🔥 "+version+" villager generated!"
+function genVillager(){
+
+  const name=
+    $("vn").value.trim()||
+    "Fire Trader";
+
+  const profession=
+    $("vp").value;
+
+  const level=
+    Math.min(
+      5,
+      Math.max(
+        1,
+        Number($("vl").value)||5
+      )
     );
 
-}
+  const type=
+    $("vt").value;
 
 
-/* =========================================================
-   POTION
-========================================================= */
-
-function generatePotion(){
-
-    const effect=
-        cleanItem(
-            document.getElementById(
-                "effect"
-            ).value
-        );
+  const options=[];
 
 
-    const duration=
-        Math.max(
-            1,
-            Number(
-                document.getElementById(
-                    "duration"
-                ).value
-            ) || 60
-        );
+  if($("vnoai").checked)
+    options.push("NoAI:1b");
 
+  if($("vinv").checked)
+    options.push("Invulnerable:1b");
 
-    const amplifier=
-        Math.max(
-            0,
-            Number(
-                document.getElementById(
-                    "amplifier"
-                ).value
-            )-1
-        );
+  if($("vsil").checked)
+    options.push("Silent:1b");
 
-
-    const command=
-        "/effect give @p minecraft:"+
-        effect+
-        " "+
-        duration+
-        " "+
-        amplifier;
-
-
-    document.getElementById(
-        "potionResult"
-    ).value=command;
-
-
-    document.getElementById(
-        "potionOutput"
-    ).style.display="block";
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function cleanItem(value){
-
-    return String(value||"")
-        .trim()
-        .toLowerCase()
-        .replace(/^minecraft:/,"")
-        .replace(/\s+/g,"_");
-
-}
-
-
-function safeAttr(value){
-
-    return String(value??"")
-        .replace(/&/g,"&amp;")
-        .replace(/"/g,"&quot;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
-
-}
-
-
-function jsonText(text){
-
-    return (
-        "'"+
-        JSON.stringify({
-            text:String(text)
-        })+
-        "'"
+  if($("vper").checked)
+    options.push(
+      "PersistenceRequired:1b"
     );
 
+
+  let command="";
+
+
+  /* ===== 1.8 / 1.12 ===== */
+
+  if(
+    version()==="1.8"||
+    version()==="1.12.2"
+  ){
+
+    const professionID=
+      professionNumbers[profession]||
+      0;
+
+    const recipes=
+      trades
+        .map(oldTrade)
+        .join(",");
+
+
+    command=
+      "/summon Villager ~ ~ ~ {"+
+      "CustomName:"+
+      quote(name)+
+      ","+
+      "Profession:"+
+      professionID+
+      ","+
+      "Career:1,"+
+      "CareerLevel:"+
+      level+
+      ","+
+      "Offers:{Recipes:["+
+      recipes+
+      "]}"+
+      (options.length
+        ?","+options.join(",")
+        :"")+
+      "}";
+
+  }
+
+
+  /* ===== 1.16 - 1.20.4 ===== */
+
+  else if(
+    [
+      "1.16.5",
+      "1.19.4",
+      "1.20.1",
+      "1.20.4"
+    ].includes(version())
+  ){
+
+    const recipes=
+      trades
+        .map(midTrade)
+        .join(",");
+
+
+    command=
+      "/summon minecraft:villager ~ ~ ~ {"+
+      "VillagerData:{"+
+      "type:\"minecraft:"+
+      type+
+      "\","+
+      "profession:\"minecraft:"+
+      profession+
+      "\","+
+      "level:"+
+      level+
+      "},"+
+      "CustomName:"+
+      quote(name)+
+      ","+
+      "Offers:{Recipes:["+
+      recipes+
+      "]}"+
+      ","+
+      "Xp:"+
+      (Number($("vx").value)||10)+
+      (options.length
+        ?","+options.join(",")
+        :"")+
+      "}";
+
+  }
+
+
+  /* ===== 1.20.5+ / 1.21+ ===== */
+
+  else{
+
+    const recipes=
+      trades
+        .map(newTrade)
+        .join(",");
+
+
+    command=
+      "/summon minecraft:villager ~ ~ ~ {"+
+      "villager_data:{"+
+      "type:\"minecraft:"+
+      type+
+      "\","+
+      "profession:\"minecraft:"+
+      profession+
+      "\","+
+      "level:"+
+      level+
+      "},"+
+      "custom_name:"+
+      quote(name)+
+      ","+
+      "offers:{recipes:["+
+      recipes+
+      "]}"+
+      ","+
+      "xp:"+
+      (Number($("vx").value)||10)+
+      (options.length
+        ?","+options.join(",")
+        :"")+
+      "}";
+
+  }
+
+
+  $("vo").textContent=command;
+
+  toast(
+    "🔥 Villager generated for "+
+    version()
+  );
+
 }
 
 
-function parseEnchantments(value){
+/* ================= SAVE ================= */
 
-    const result=[];
+function saveVillager(){
 
-    if(!value)return result;
+  const data={
 
+    trades:trades,
 
-    String(value)
-        .split(",")
-        .forEach(function(part){
+    settings:{
 
-            const x=
-                part.trim().split(":");
+      name:$("vn").value,
+      profession:$("vp").value,
+      level:$("vl").value,
+      type:$("vt").value,
+      uses:$("vu").value,
+      xp:$("vx").value,
 
+      noai:$("vnoai").checked,
+      inv:$("vinv").checked,
+      silent:$("vsil").checked,
+      persistent:$("vper").checked
 
-            if(x.length<2)return;
+    }
 
-
-            const id=
-                cleanItem(x[0]);
-
-
-            const level=
-                Math.max(
-                    1,
-                    Number(x[1])||1
-                );
+  };
 
 
-            if(id){
-
-                result.push({
-                    id:id,
-                    level:level
-                });
-
-            }
-
-        });
+  localStorage.setItem(
+    "fireHubVillager",
+    JSON.stringify(data)
+  );
 
 
-    return result;
+  toast("💾 Villager saved");
 
 }
 
 
-/* =========================================================
-   STARTER TRADE
-========================================================= */
+function loadVillager(){
 
-addTrade({
+  const raw=
+    localStorage.getItem(
+      "fireHubVillager"
+    );
 
-    cost1:"emerald",
-    cost1Amount:1,
 
-    cost2:"",
-    cost2Amount:1,
+  if(!raw){
 
-    reward:"diamond",
-    rewardAmount:1,
+    toast("No saved villager");
 
-    maxUses:999999,
-    xp:10,
+    return;
 
-    priceMultiplier:0.05,
+  }
 
-    disabled:false
 
-});
+  try{
 
+    const data=
+      JSON.parse(raw);
+
+    trades=
+      Array.isArray(data.trades)
+        ?data.trades
+        :trades;
+
+
+    const s=
+      data.settings||{};
+
+
+    $("vn").value=
+      s.name||"Fire Trader";
+
+    $("vp").value=
+      s.profession||"librarian";
+
+    $("vl").value=
+      s.level||5;
+
+    $("vt").value=
+      s.type||"plains";
+
+    $("vu").value=
+      s.uses||999999;
+
+    $("vx").value=
+      s.xp||10;
+
+    $("vnoai").checked=
+      !!s.noai;
+
+    $("vinv").checked=
+      !!s.inv;
+
+    $("vsil").checked=
+      !!s.silent;
+
+    $("vper").checked=
+      s.persistent!==false;
+
+
+    renderTrades();
+
+    toast("📂 Villager loaded");
+
+  }catch{
+
+    toast("Save is invalid");
+
+  }
+
+}
+
+
+/* ================= TELLRAW ================= */
+
+function genTellraw(){
+
+  const target=
+    $("tt").value.trim()||
+    "@a";
+
+  const text=
+    $("tx").value||
+    "WELCOME TO FIRE HUB!";
+
+  const color=
+    $("tc").value;
+
+  const bold=
+    $("tb").value==="true";
+
+
+  const json=
+    JSON.stringify({
+      text:text,
+      color:color,
+      bold:bold
+    });
+
+
+  $("tro").textContent=
+    "/tellraw "+
+    target+
+    " "+
+    json;
+
+}
+
+
+/* ================= COLOURS ================= */
+
+const colours=[
+
+  ["&0","Black"],
+  ["&1","Dark Blue"],
+  ["&2","Dark Green"],
+  ["&3","Dark Aqua"],
+  ["&4","Dark Red"],
+  ["&5","Dark Purple"],
+  ["&6","Gold"],
+  ["&7","Gray"],
+  ["&8","Dark Gray"],
+  ["&9","Blue"],
+  ["&a","Green"],
+  ["&b","Aqua"],
+  ["&c","Red"],
+  ["&d","Light Purple"],
+  ["&e","Yellow"],
+  ["&f","White"],
+  ["&k","Obfuscated"],
+  ["&l","Bold"],
+  ["&m","Strikethrough"],
+  ["&n","Underline"],
+  ["&o","Italic"],
+  ["&r","Reset"]
+
+];
+
+
+function renderColours(){
+
+  const box=$("colors");
+
+  colours.forEach(
+    ([code,name])=>{
+
+      const b=
+        document.createElement("button");
+
+      b.className="colorbtn";
+
+      b.innerHTML=
+        "<b>"+
+        code+
+        "</b> — "+
+        name;
+
+      b.onclick=()=>{
+
+        copyValue(code);
+
+        $("preview").textContent=
+          "Fire Hub "+
+          code+
+          "EXAMPLE &rFire Hub";
+
+      };
+
+
+      box.appendChild(b);
+
+    }
+  );
+
+}
+
+
+/* ================= PLACEHOLDER DOWNLOAD ================= */
+
+function placeholder(event,name){
+
+  event.preventDefault();
+
+  toast(
+    name+
+    " download is not connected yet"
+  );
+
+}
+
+
+/* ================= START ================= */
+
+renderColours();
+renderTrades();
+
+genGive();
+genSummon();
+genExecute();
+genFill();
+genEffect();
+genEnchant();
+genTellraw();
+
+$("version").addEventListener(
+  "change",
+  ()=>{
+    toast(
+      "Minecraft "+
+      version()+
+      " selected"
+    );
+  }
+);
 
 </script>
 
 </body>
 </html>
-```
